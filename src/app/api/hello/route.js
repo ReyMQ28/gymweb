@@ -1,6 +1,8 @@
 "server client";
-import {NextResponse} from 'next/server';
+import { NextResponse } from "next/server";
+import { conn } from "@/libs/mysql";
 
 export async function GET() {
-  return NextResponse.json('Hello World!');
+  const result = await conn.query("SELECT NOW()");
+  return NextResponse.json({ message: result[0]["NOW()"] });
 }
