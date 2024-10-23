@@ -21,7 +21,7 @@ function UserTarget() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post("/api/products", product);
+    const res = await axios.post("/api/clientesbyid", product);
     console.log(res);
     form.current.reset();
   };

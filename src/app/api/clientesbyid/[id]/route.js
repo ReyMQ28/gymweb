@@ -4,7 +4,7 @@ import { conn } from "@/libs/mysql";
 // GET /api/products/ID
 export async function GET(request, { params }) {
   try {
-    const result = await conn.query("SELECT * FROM product WHERE id = ?", [
+    const result = await conn.query("SELECT * FROM clientes WHERE id = ?", [
       params.id,
     ]);
     if (result.affectedRows === 0) {
@@ -22,7 +22,7 @@ export async function GET(request, { params }) {
 // DELETE /api/products/ID
 export async function DELETE(request, { params }) {
   try {
-    const result = await conn.query("DELETE FROM product WHERE id = ?", [
+    const result = await conn.query("DELETE FROM clientes WHERE id = ?", [
       params.id,
     ]);
     if (result.affectedRows === 0) {
@@ -41,7 +41,7 @@ export async function DELETE(request, { params }) {
 export async function PUT(request, { params }) {
   try {
     const data = await request.json();
-    const result = await conn.query("UPDATE product SET ? WHERE id = ?", [
+    const result = await conn.query("UPDATE clientes SET ? WHERE id = ?", [
       data,
       params.id,
     ]);
@@ -53,7 +53,7 @@ export async function PUT(request, { params }) {
     }
 
     const updateProduct = await conn.query(
-      "SELECT * FROM product WHERE id = ?",
+      "SELECT * FROM clientes WHERE id = ?",
       [params.id]
     );
 

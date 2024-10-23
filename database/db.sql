@@ -1,5 +1,5 @@
 CREATE TABLE
-    product (
+    clientes (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         identificación VARCHAR(200) NOT NULL,	
         name VARCHAR(200) NOT NULL,

@@ -1,8 +1,10 @@
-import React from 'react'
+import CreateMap from "../../components/clientes/CreateMap"
 
 function user() {
   return (
-    <div>user</div>
+    <div>
+      <CreateMap />
+    </div>
   )
 }
 

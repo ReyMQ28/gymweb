@@ -1,5 +1,5 @@
-import UserTarget from "@/components/UserTarget";
-import React from "react";
+import UserTarget from "@/components/users/UserTarget";
+
 
 function Clientes() {
   return (
