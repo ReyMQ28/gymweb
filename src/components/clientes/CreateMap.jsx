@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import DeleteButton from "@/app/users/DeleteButtom";
+
 async function loadclientes() {
   const { data } = await axios.get("http://localhost:3000/api/clientesbyid");
   return data;
@@ -9,11 +11,24 @@ async function clientesTable() {
   const clientes = await loadclientes();
 
   return (
-    <div className="">
+    <div className="flex flex-col justify-center items-center">
+      <div className="">
+        <div className="grid grid-cols-4 gap-2 p-2 ">
+          <div> Delete </div>
+          <div>Identificación</div>
+          <div>Nombre</div>
+          <div>Apellido</div>
+        </div>
+      </div>
+
       {clientes.map((cliente) => (
-        <div key={cliente.id}>
-          <div className="flex justify-center items-center  gap-4">
-            <div> delete </div>
+        <div key={cliente.id} className="">
+          {" "}
+          <div className="grid grid-cols-4 gap-4 p-2 ">
+            <div className=" flex justify-center items-center w-9 h-9 text-lg bg-red-500 rounded-full">
+              {" "}
+              <DeleteButton clienteId={cliente.id} />
+            </div>
             <div>{cliente.identificación}</div>
             <div>{cliente.name}</div>
             <div>{cliente.lastname}</div>
