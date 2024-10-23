@@ -12,18 +12,19 @@ export async function GET() {
 
 export async function POST(request) {
   try {
-    const { name, description, price } = await request.json();
+    const { name, identificación, lastname } = await request.json();
 
     const result = await conn.query("INSERT INTO product SET ?", {
+      
+      identificación: identificación,
       name: name,
-      description: description,
-      price: price,
+      lastname: lastname,
     });
 
     return NextResponse.json({
+      identificación,
       name,
-      description,
-      price,
+      lastname,
       id: result.insertId,
     });
   } catch (error) {
