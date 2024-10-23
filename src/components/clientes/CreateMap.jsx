@@ -11,10 +11,11 @@ async function clientesTable() {
   const clientes = await loadclientes();
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    
+    <div className="grid  container w-auto px-80">
       <div className="">
         <div className="grid grid-cols-4 gap-2 p-2 ">
-          <div> Delete </div>
+          <div> Eliminar </div>
           <div>Identificación</div>
           <div>Nombre</div>
           <div>Apellido</div>
@@ -24,7 +25,7 @@ async function clientesTable() {
       {clientes.map((cliente) => (
         <div key={cliente.id} className="">
           {" "}
-          <div className="grid grid-cols-4 gap-4 p-2 ">
+          <div className="grid grid-cols-4">
             <div className=" flex justify-center items-center w-9 h-9 text-lg bg-red-500 rounded-full">
               {" "}
               <DeleteButton clienteId={cliente.id} />
