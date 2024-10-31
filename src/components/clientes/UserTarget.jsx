@@ -27,7 +27,7 @@ function UserTarget() {
   };
 
   return (
-    <div className="flex justify-center items-center mt-36">
+    <div className="flex justify-center items-center mt-8 bg-white dark:bg-gray-800 p-12 rounded-lg shadow-md shadow-gray-400/50">
       <form onSubmit={handleSubmit} className="max-w-md mx-auto" ref={form}>
         <div className="relative z-0 w-full mb-5 group">
           <input

@@ -1,14 +1,14 @@
+import Sidebar from "@/components/sidebar/Sidebar";
 import Link from "next/link";
 
 function page() {
   return (
-    <div >
+    <div>
       <div className="flex flex-col items-center justify-center">
-
         <h1 className="text-6xl">Ultragym</h1>
         <br></br>
         <Link href={"/users"}>
-          <h1>Lista de Usuarios</h1>
+          <h1>Lista de Clientes</h1>
         </Link>
         <Link href={"/clientes"}>
           <h1> Crear Clientes</h1>

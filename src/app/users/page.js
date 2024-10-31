@@ -1,13 +1,14 @@
-import CreateMap from "../../components/clientes/CreateMap"
+import UserTarget from "@/components/clientes/UserTarget";
+import CreateMap from "../../components/clientes/CreateMap";
 
 function user() {
   return (
-    <div>
-      <div className="flex justify-center items-center">Lista de Usuarios</div>
+    <div className="flex flex-col justify-center items-center pl-60">
+      <div className="">Crear Cliente</div>
       <br></br>
-      <CreateMap />
+      <UserTarget />
     </div>
-  )
+  );
 }
 
-export default user
+export default user;

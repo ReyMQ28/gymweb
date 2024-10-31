@@ -4,9 +4,9 @@ import ProductTarget from "@/components/products/ProductTarget";
 
 function NewProdcts() {
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center">
       <h1>Crear Productos</h1>
-      <ProductTarget/>
+      <ProductTarget  />
       </div>
 
     
