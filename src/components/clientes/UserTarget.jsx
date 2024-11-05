@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
 import { useState } from "react";
-import axios from "axios";
+
 
 function UserTarget() {
-  const [product, setProduct] = useState({
+  const [client, setClient] = useState({
     identificación: "",
     name: "",
     lastname: "",
@@ -13,16 +13,23 @@ function UserTarget() {
   const form = React.useRef(null);
 
   const handleChange = (e) => {
-    setProduct({
-      ...product,
+    setClient({
+      ...client,
+
       [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post("/api/clientesbyid", product);
-    console.log(res);
+    const res = await fetch("http://localhost:3000/api/clientesbyid", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(client),
+    });
+    console.log(res.json());
     form.current.reset();
   };
 

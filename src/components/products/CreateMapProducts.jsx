@@ -3,7 +3,7 @@ import axios from "axios";
 import DeleteButton from "@/app/newproducts/DeleteButtomProducts";
 
 async function loadproducts() {
-  const { data } = await axios.get("http://localhost:3000/api/products");
+  const { data } = await axios.get("/api/products");
   return data;
 }
 

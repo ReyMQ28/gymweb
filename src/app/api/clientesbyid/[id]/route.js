@@ -1,19 +1,20 @@
 import { NextResponse } from "next/server";
-import { conn } from "@/libs/mysql";
+import { connectMongoDB } from "@/libs/mongodb";
+import Clientes from "@/models/clientes";
+import axios from "axios";
 
 // GET /api/products/ID
 export async function GET(request, { params }) {
+  await connectMongoDB();
   try {
-    const result = await conn.query("SELECT * FROM clientes WHERE id = ?", [
-      params.id,
-    ]);
-    if (result.affectedRows === 0) {
+    const clientes = await Clientes.findById(params.id);
+    if (!clientes) {
       return NextResponse.json(
-        { message: "product not found" },
+        { message: "clients not found" },
         { status: 404 }
       );
     }
-    return NextResponse.json(result[0]);
+    return NextResponse.json(clientes);
   } catch (error) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
@@ -21,17 +22,16 @@ export async function GET(request, { params }) {
 
 // DELETE /api/products/ID
 export async function DELETE(request, { params }) {
+  await connectMongoDB();
   try {
-    const result = await conn.query("DELETE FROM clientes WHERE id = ?", [
-      params.id,
-    ]);
-    if (result.affectedRows === 0) {
+    const deletedClientes = await Clientes.findByIdAndDelete(params.id);
+    if (!deletedClientes) {
       return NextResponse.json(
-        { message: "product not found" },
+        { message: "clients not found" },
         { status: 404 }
       );
     }
-    return NextResponse.json("delete product by id");
+    return NextResponse.json(deletedClientes);
   } catch (error) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
@@ -39,25 +39,18 @@ export async function DELETE(request, { params }) {
 
 // PUT /api/products/ID
 export async function PUT(request, { params }) {
+  await connectMongoDB();
   try {
     const data = await request.json();
-    const result = await conn.query("UPDATE clientes SET ? WHERE id = ?", [
-      data,
-      params.id,
-    ]);
-    if (result.affectedRows === 0) {
+    const updateClientes = await Clientes.findByIdAndUpdate(params.id, data);
+
+    if (!updateClientes) {
       return NextResponse.json(
-        { message: "product not found" },
+        { message: "clients not found" },
         { status: 404 }
       );
     }
-
-    const updateProduct = await conn.query(
-      "SELECT * FROM clientes WHERE id = ?",
-      [params.id]
-    );
-
-    return NextResponse.json(updateProduct[0]);
+    return NextResponse.json(updateClientes);
   } catch (error) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
