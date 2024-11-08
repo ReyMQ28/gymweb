@@ -1,23 +1,45 @@
 import { NextResponse } from "next/server";
-import { conn } from "@/libs/mysql";
+import { connectMongoDB } from "@/libs/mongodb";
+import Productos from "@/models/productos";
 
-// GET /api/products
+
 export async function GET() {
+
+  await connectMongoDB();
+ 
   try {
-    const result = await conn.query("SELECT * FROM products");
-    return NextResponse.json(result);
+    const productos = await Productos.find({});
+    return NextResponse.json(productos);
   } catch (error) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
 
-//POST /api/products
 export async function POST(request) {
+
+  await connectMongoDB();
+  
   try {
-    const data = await request.json();
-    const result = await conn.query("INSERT INTO products SET ?", data);
-    return NextResponse.json(result);
+    const { name, unityCost, unityPrice, existence, status } = await request.json();  
+
+    await Productos.create({
+      name: name,
+      unityCost: unityCost,
+      unityPrice: unityPrice,
+      existence: existence,
+      status: status,   
+       
+    });
+
+    return NextResponse.json({
+      name,
+      unityCost,
+      unityPrice,
+      existence,  
+      status,   
+      message: "producto creado",
+    });
   } catch (error) {
-    return NextResponse.json({ message: error.message }, { status: 500 });
+    return NextResponse.json({ message: error.message }, { status: 404 });
   }
 }

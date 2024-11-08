@@ -1,11 +1,13 @@
 import { NextResponse } from "next/server";
 import { connectMongoDB } from "@/libs/mongodb";
 import Clientes from "@/models/clientes";
-import axios from "axios";
+
 
 // GET /api/products/ID
 export async function GET(request, { params }) {
+
   await connectMongoDB();
+
   try {
     const clientes = await Clientes.findById(params.id);
     if (!clientes) {

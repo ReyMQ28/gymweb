@@ -1,14 +1,27 @@
-import axios from "axios";
-
+"use client";
+import { useState, useEffect } from "react";
 import DeleteButton from "@/app/newproducts/DeleteButtomProducts";
+import { useRouter, useParams } from "next/navigation";
 
-async function loadproducts() {
-  const { data } = await axios.get("/api/products");
-  return data;
-}
+function CreateMapProducts() {
+  const [products, setEventos] = useState([]);
+  const router = useRouter();
 
-async function ProductsTable() {
-  const products = await loadproducts();
+  useEffect(() => {
+    const cargarProducts = async () => {
+      const response = await fetch("http://localhost:3000/api/products", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      setEventos(data.reverse());
+    };
+
+    cargarProducts();
+    
+  }, []);
 
   return (
     <div className="grid w-auto">
@@ -43,4 +56,4 @@ async function ProductsTable() {
   );
 }
 
-export default ProductsTable;
+export default CreateMapProducts;

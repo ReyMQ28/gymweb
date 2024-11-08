@@ -14,7 +14,9 @@ export async function GET() {
 }
 
 export async function POST(request) {
+  
   await connectMongoDB();
+
   try {
     const { name, identificación, lastname } = await request.json();
 

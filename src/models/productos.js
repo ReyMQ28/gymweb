@@ -6,7 +6,7 @@ const productsSchema = new Schema({
   unityPrice: { type: String, required: true },
   existence: { type: String, required: true },
   status: { type: String, required: true },
-  createAt : { type: String, required: true },
+  createAt : { type: String, required: false },
 });
 const products = models.products || mongoose.model("products", productsSchema);
 export default products;
